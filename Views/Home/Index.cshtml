@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-5">
+    <div class="jumbotron bg-light p-5 rounded">
+        <h1 class="display-4">
+            <i class="fas fa-book text-primary"></i>
+            Welcome to Library Management System
+        </h1>
+        <p class="lead">
+            A comprehensive solution for managing your library's books, users, and transactions.
+        </p>
+        <hr class="my-4">
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-book fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Manage Books</h5>
+                        <p class="card-text">Add, edit, delete and search books in your library.</p>
+                        <a asp-controller="Books" asp-action="Index" class="btn btn-primary">Go to Books</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-exchange-alt fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Issue/Return Books</h5>
+                        <p class="card-text">Manage book transactions and track overdue books.</p>
+                        <a asp-controller="Transactions" asp-action="Index" class="btn btn-success">Go to Transactions</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-chart-bar fa-3x text-info mb-3"></i>
+                        <h5 class="card-title">Dashboard</h5>
+                        <p class="card-text">View library statistics and reports.</p>
+                        <a asp-controller="Transactions" asp-action="Dashboard" class="btn btn-info">View Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h4>Quick Actions</h4>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-3">
+                <a asp-controller="Books" asp-action="Create" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus"></i> Add New Book
+                </a>
+                <a asp-controller="Transactions" asp-action="Issue" class="btn btn-success btn-lg">
+                    <i class="fas fa-book-medical"></i> Issue Book
+                </a>
+                <a asp-controller="Transactions" asp-action="Overdue" class="btn btn-warning btn-lg">
+                    <i class="fas fa-exclamation-triangle"></i> View Overdue
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

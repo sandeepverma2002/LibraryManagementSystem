@@ -1,0 +1,414 @@
+﻿@model LibraryManagementSystem.Controllers.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h2>
+                <i class="fas fa-tachometer-alt"></i> Library Dashboard
+            </h2>
+            <p class="text-muted">Overview of library statistics and activities</p>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Statistics Cards -->
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <div class="bg-primary p-3 rounded-circle">
+                            <i class="fas fa-book fa-2x text-white"></i>
+                        </div>
+                    </div>
+                    <h3 class="card-title">@Model.TotalBooks</h3>
+                    <p class="card-text text-muted">Total Books</p>
+                    <div class="small text-primary">
+                        <i class="fas fa-chart-line"></i> In Library Collection
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card border-success">
+                <div class="card-body text-center">
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <div class="bg-success p-3 rounded-circle">
+                            <i class="fas fa-users fa-2x text-white"></i>
+                        </div>
+                    </div>
+                    <h3 class="card-title">@Model.TotalUsers</h3>
+                    <p class="card-text text-muted">Registered Users</p>
+                    <div class="small text-success">
+                        <i class="fas fa-user-check"></i> Library Members
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <div class="bg-info p-3 rounded-circle">
+                            <i class="fas fa-book-reader fa-2x text-white"></i>
+                        </div>
+                    </div>
+                    <h3 class="card-title">@Model.IssuedBooks</h3>
+                    <p class="card-text text-muted">Books Issued</p>
+                    <div class="small text-info">
+                        <i class="fas fa-exchange-alt"></i> Currently with Users
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card border-warning">
+                <div class="card-body text-center">
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <div class="bg-warning p-3 rounded-circle">
+                            <i class="fas fa-exclamation-triangle fa-2x text-white"></i>
+                        </div>
+                    </div>
+                    <h3 class="card-title">@Model.OverdueBooks</h3>
+                    <p class="card-text text-muted">Overdue Books</p>
+                    <div class="small text-warning">
+                        <i class="fas fa-clock"></i> Past Return Date
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Statistics -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-pie"></i> Books Distribution
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-success rounded-circle p-2 me-3">
+                                    <i class="fas fa-bookmark text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="mb-0">@Model.AvailableBooks</h4>
+                                    <small class="text-muted">Available Books</small>
+                                </div>
+                            </div>
+                            <div class="progress mb-4">
+                                @{
+                                    var availablePercentage = Model.TotalBooks > 0 ?
+                                    (Model.AvailableBooks * 100 / Model.TotalBooks) : 0;
+                                }
+                                <div class="progress-bar bg-success" role="progressbar"
+                                     style="width: @availablePercentage%"
+                                     aria-valuenow="@availablePercentage"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                    @availablePercentage%
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-info rounded-circle p-2 me-3">
+                                    <i class="fas fa-book-open text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="mb-0">@Model.IssuedBooks</h4>
+                                    <small class="text-muted">Issued Books</small>
+                                </div>
+                            </div>
+                            <div class="progress mb-4">
+                                @{
+                                    var issuedPercentage = Model.TotalBooks > 0 ?
+                                    (Model.IssuedBooks * 100 / Model.TotalBooks) : 0;
+                                }
+                                <div class="progress-bar bg-info" role="progressbar"
+                                     style="width: @issuedPercentage%"
+                                     aria-valuenow="@issuedPercentage"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                    @issuedPercentage%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h6>Summary</h6>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Total Collection
+                                <span class="badge bg-primary rounded-pill">@Model.TotalBooks</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Available for Issue
+                                <span class="badge bg-success rounded-pill">@Model.AvailableBooks</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Currently Issued
+                                <span class="badge bg-info rounded-pill">@Model.IssuedBooks</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bolt"></i> Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <a asp-controller="Books" asp-action="Create"
+                               class="btn btn-primary w-100 h-100 py-3 d-flex flex-column align-items-center justify-content-center">
+                                <i class="fas fa-plus-circle fa-2x mb-2"></i>
+                                <span>Add New Book</span>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6">
+                            <a asp-controller="Transactions" asp-action="Issue"
+                               class="btn btn-success w-100 h-100 py-3 d-flex flex-column align-items-center justify-content-center">
+                                <i class="fas fa-book-medical fa-2x mb-2"></i>
+                                <span>Issue Book</span>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6">
+                            <a asp-controller="Transactions" asp-action="Overdue"
+                               class="btn btn-warning w-100 h-100 py-3 d-flex flex-column align-items-center justify-content-center">
+                                <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
+                                <span>View Overdue</span>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6">
+                            <a asp-controller="Books" asp-action="Index"
+                               class="btn btn-info w-100 h-100 py-3 d-flex flex-column align-items-center justify-content-center">
+                                <i class="fas fa-search fa-2x mb-2"></i>
+                                <span>Search Books</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="alert alert-info">
+                        <h6><i class="fas fa-lightbulb"></i> Tips & Information</h6>
+                        <ul class="mb-0">
+                            <li>Books are issued for 14 days maximum</li>
+                            <li>Overdue fine is $10 per day</li>
+                            <li>Users can issue multiple books</li>
+                            <li>Check overdue section regularly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activities -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-history"></i> Recent Activities
+                        </h5>
+                        <a asp-controller="Transactions" asp-action="Index" class="btn btn-sm btn-outline-primary">
+                            View All Transactions
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @{
+                        // This would typically come from your database
+                        // For now, showing static content
+                    }
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Book Issued</h6>
+                                <small class="text-muted">Today, 10:30 AM</small>
+                            </div>
+                            <p class="mb-1">"The Great Gatsby" issued to John Doe</p>
+                            <small class="text-muted">Due Date: 2 weeks from today</small>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Book Returned</h6>
+                                <small class="text-muted">Yesterday, 3:15 PM</small>
+                            </div>
+                            <p class="mb-1">"To Kill a Mockingbird" returned by Jane Smith</p>
+                            <small class="text-muted">Returned on time, no fine</small>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">New Book Added</h6>
+                                <small class="text-muted">2 days ago</small>
+                            </div>
+                            <p class="mb-1">"1984" by George Orwell added to collection</p>
+                            <small class="text-muted">5 copies available</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Information -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle"></i> System Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <div class="display-6 text-primary">@DateTime.Now.ToString("dd")</div>
+                                <small class="text-muted">Day of Month</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <div class="display-6 text-success">@DateTime.Now.ToString("HH:mm")</div>
+                                <small class="text-muted">Current Time</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <div class="display-6 text-info">@DateTime.Now.ToString("MMMM")</div>
+                                <small class="text-muted">Current Month</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <div class="display-6 text-warning">@DateTime.Now.Year</div>
+                                <small class="text-muted">Current Year</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <small class="text-muted">
+                        <i class="fas fa-database"></i> Library Management System v1.0 |
+                        Last Updated: @DateTime.Now.ToString("MMMM dd, yyyy HH:mm")
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add some custom CSS for the dashboard -->
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+    .rounded-circle {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .progress {
+        height: 10px;
+        border-radius: 5px;
+    }
+
+    .list-group-item {
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+        transition: background-color 0.2s ease;
+    }
+
+        .list-group-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .list-group-item:first-child {
+            border-top: none;
+        }
+
+        .list-group-item:last-child {
+            border-bottom: none;
+        }
+
+    .btn-hover-effect:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<script>
+    // Simple animation for statistics
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add animation class to cards
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.classList.add('animate__animated', 'animate__fadeInUp');
+        });
+
+        // Add hover effect to quick action buttons
+        const quickActionBtns = document.querySelectorAll('.btn.w-100.h-100');
+        quickActionBtns.forEach(btn => {
+            btn.classList.add('btn-hover-effect');
+        });
+    });
+</script>
+
+<!-- Add Animate.css for animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">

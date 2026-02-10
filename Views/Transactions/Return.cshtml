@@ -1,0 +1,81 @@
+﻿@model LibraryManagementSystem.Models.Transaction
+
+@{
+    ViewData["Title"] = "Return Book";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4>Return Book</h4>
+                </div>
+                <div class="card-body">
+                    <h5>Are you sure you want to return this book?</h5>
+
+                    <dl class="row mt-4">
+                        <dt class="col-sm-4">Book</dt>
+                        <dd class="col-sm-8">@Model.Book?.Title</dd>
+
+                        <dt class="col-sm-4">User</dt>
+                        <dd class="col-sm-8">@Model.User?.FirstName @Model.User?.LastName</dd>
+
+                        <dt class="col-sm-4">Issue Date</dt>
+                        <dd class="col-sm-8">@Model.IssueDate.ToString("yyyy-MM-dd")</dd>
+
+                        <dt class="col-sm-4">Due Date</dt>
+                        <dd class="col-sm-8">@Model.DueDate.ToString("yyyy-MM-dd")</dd>
+
+                        <dt class="col-sm-4">Days Overdue</dt>
+                        <dd class="col-sm-8">
+                            @{
+                                var daysOverdue = (DateTime.UtcNow - Model.DueDate).Days;
+                                if (daysOverdue > 0)
+                                {
+                                    <span class="badge bg-danger">@daysOverdue days</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Not overdue</span>
+                                }
+                            }
+                        </dd>
+
+                        <dt class="col-sm-4">Fine Amount</dt>
+                        <dd class="col-sm-8">
+                            @if (daysOverdue > 0)
+                            {
+                                <span class="text-danger">$@((daysOverdue * 10).ToString("0.00"))</span>
+                            }
+                            else
+                            {
+                                <span>$0.00</span>
+                            }
+                        </dd>
+                    </dl>
+
+                    @if (daysOverdue > 0)
+                    {
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            This book is @daysOverdue days overdue. Fine will be calculated as $@((daysOverdue * 10).ToString("0.00")).
+                        </div>
+                    }
+
+                    <form asp-action="ReturnConfirmed" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-undo"></i> Return Book
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
