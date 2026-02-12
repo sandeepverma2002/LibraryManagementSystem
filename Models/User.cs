@@ -22,7 +22,6 @@ namespace LibraryManagementSystem.Models
         [Phone(ErrorMessage = "Invalid phone number")]
         public string? Phone { get; set; }
 
-        [Required(ErrorMessage = "Membership number is required")]
         public string MembershipNumber { get; set; }
 
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;

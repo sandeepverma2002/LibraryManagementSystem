@@ -38,7 +38,7 @@ namespace LibraryManagementSystem.Models
         [Range(0, 1000, ErrorMessage = "Available copies must be between 0 and 1000")]
         public int AvailableCopies { get; set; } = 1;
 
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+       public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedDate { get; set; } = DateTime.UtcNow;
 
         public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
