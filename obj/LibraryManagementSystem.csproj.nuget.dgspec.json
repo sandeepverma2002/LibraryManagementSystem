@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\LibraryManagementSystem-assigment\\LibraryManagementSystem\\LibraryManagementSystem\\LibraryManagementSystem.csproj": {}
+    "C:\\Projects\\LibraryManagementSystem-assigment\\backup\\LibraryManagementSystem\\LibraryManagementSystem.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\LibraryManagementSystem-assigment\\LibraryManagementSystem\\LibraryManagementSystem\\LibraryManagementSystem.csproj": {
+    "C:\\Projects\\LibraryManagementSystem-assigment\\backup\\LibraryManagementSystem\\LibraryManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\LibraryManagementSystem-assigment\\LibraryManagementSystem\\LibraryManagementSystem\\LibraryManagementSystem.csproj",
+        "projectUniqueName": "C:\\Projects\\LibraryManagementSystem-assigment\\backup\\LibraryManagementSystem\\LibraryManagementSystem.csproj",
         "projectName": "LibraryManagementSystem",
-        "projectPath": "C:\\Projects\\LibraryManagementSystem-assigment\\LibraryManagementSystem\\LibraryManagementSystem\\LibraryManagementSystem.csproj",
+        "projectPath": "C:\\Projects\\LibraryManagementSystem-assigment\\backup\\LibraryManagementSystem\\LibraryManagementSystem.csproj",
         "packagesPath": "C:\\Users\\sande\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\LibraryManagementSystem-assigment\\LibraryManagementSystem\\LibraryManagementSystem\\obj\\",
+        "outputPath": "C:\\Projects\\LibraryManagementSystem-assigment\\backup\\LibraryManagementSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -86,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

@@ -11,46 +11,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        .navbar-brand {
-            font-weight: bold;
-        }
-
-        .sidebar {
-            min-height: calc(100vh - 56px);
-            background-color: #f8f9fa;
-            padding-top: 20px;
-        }
-
-            .sidebar .nav-link {
-                color: #333;
-                padding: 10px 15px;
-                margin: 5px 0;
-                border-radius: 5px;
+            .navbar-brand {
+                font-weight: bold;
             }
 
-                .sidebar .nav-link:hover {
-                    background-color: #e9ecef;
+            .sidebar {
+                min-height: calc(100vh - 56px);
+                background-color: #f8f9fa;
+                padding-top: 20px;
+            }
+
+                .sidebar .nav-link {
+                    color: #333;
+                    padding: 10px 15px;
+                    margin: 5px 0;
+                    border-radius: 5px;
                 }
 
-                .sidebar .nav-link.active {
-                    background-color: #0d6efd;
-                    color: white;
-                }
+                    .sidebar .nav-link:hover {
+                        background-color: #e9ecef;
+                    }
 
-        .main-content {
-            padding: 20px;
-        }
+                    .sidebar .nav-link.active {
+                        background-color: #0d6efd;
+                        color: white;
+                    }
 
-        .badge {
-            font-size: 0.8em;
-        }
+            .main-content {
+                padding: 20px;
+            }
 
-        .footer {
-            background-color: #f8f9fa;
-            padding: 20px 0;
-            margin-top: 40px;
-            border-top: 1px solid #dee2e6;
-        }
+            .badge {
+                font-size: 0.8em;
+            }
+
+            .footer {
+                background-color: #f8f9fa;
+                padding: 20px 0;
+                margin-top: 40px;
+                border-top: 1px solid #dee2e6;
+            }
     </style>
 </head>
 <body>
@@ -100,57 +100,57 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")"
-                           asp-controller="Home" asp-action="Index">
+                               asp-controller="Home" asp-action="Index">
                             <i class="fas fa-home"></i> Home
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "Dashboard" ? "active" : "")"
-                           asp-controller="Transactions" asp-action="Dashboard">
+                               asp-controller="Transactions" asp-action="Dashboard">
                             <i class="fas fa-tachometer-alt"></i> Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Books" && ViewContext.RouteData.Values["Action"]?.ToString() != "Create" ? "active" : "")"
-                           asp-controller="Books" asp-action="Index">
+                               asp-controller="Books" asp-action="Index">
                             <i class="fas fa-book"></i> All Books
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Books" && ViewContext.RouteData.Values["Action"]?.ToString() == "Create" ? "active" : "")"
-                           asp-controller="Books" asp-action="Create">
+                               asp-controller="Books" asp-action="Create">
                             <i class="fas fa-plus-circle"></i> Add New Book
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Transactions" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")"
-                           asp-controller="Transactions" asp-action="Index">
+                               asp-controller="Transactions" asp-action="Index">
                             <i class="fas fa-list"></i> All Transactions
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "Issue" ? "active" : "")"
-                           asp-controller="Transactions" asp-action="Issue">
+                               asp-controller="Transactions" asp-action="Issue">
                             <i class="fas fa-book-medical"></i> Issue Book
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "Overdue" ? "active" : "")"
-                           asp-controller="Transactions" asp-action="Overdue">
+                               asp-controller="Transactions" asp-action="Overdue">
                             <i class="fas fa-exclamation-triangle"></i> Overdue Books
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Users" ? "active" : "")"
-                           asp-controller="Users" asp-action="Index">
+                               asp-controller="Users" asp-action="Index">
                             <i class="fas fa-users"></i> Library Users
                         </a>
                     </li>
-                    <li class="nav-item">
+                    @* <li class="nav-item">
                         <a class="nav-link" asp-controller="Home" asp-action="Privacy">
                             <i class="fas fa-shield-alt"></i> Privacy
                         </a>
-                    </li>
+                    </li> *@
                 </ul>
             </div>
 
@@ -193,4 +193,5 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
